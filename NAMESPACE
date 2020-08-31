@@ -1,3 +1,17 @@
-useDynLib(RJcluster, .registration=TRUE)
+useDynLib(RJcluster)
 importFrom(Rcpp, evalCpp)
-exportPattern("^[[:alpha:]]+")
+
+
+import(matrixStats)
+import(infotheo)
+import(rlang)
+import(stats)
+importFrom("graphics", "abline", "barplot", "legend")
+import(profvis)
+import(mclust)
+
+export(TCGA_cleanData)
+export(f_rez)
+export(generateSimulationData)
+export(RJclust)
+export(scaleRJ)

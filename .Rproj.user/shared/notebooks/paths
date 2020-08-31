@@ -1,2 +1,7 @@
+/Users/rachaelshudde/Desktop/package_development/RJcluster/.Rbuildignore="391D367"
+/Users/rachaelshudde/Desktop/package_development/RJcluster/R/DATA_clean_TCGA.R="9F3766ED"
+/Users/rachaelshudde/Desktop/package_development/RJcluster/R/DATA_documentation.R="2BC98641"
+/Users/rachaelshudde/Desktop/package_development/RJcluster/R/DATA_generate_test_data.R="E74D1EF6"
+/Users/rachaelshudde/Desktop/package_development/RJcluster/R/FUNC_AMI_calculations.R="B3ECD341"
 /Users/rachaelshudde/Desktop/package_development/RJcluster/R/RcppExports.R="396076BA"
 /Users/rachaelshudde/Desktop/package_development/RJcluster/Read-and-delete-me="9DB643B2"

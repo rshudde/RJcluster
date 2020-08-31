@@ -1,0 +1,5 @@
+load("/Users/rachaelshudde/Desktop/RJclust/data/OV.Rdata")
+dta
+data
+ls()
+OV

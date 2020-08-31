@@ -1,3 +1,0 @@
-useDynLib(RJcluster, .registration=TRUE)
-importFrom(Rcpp, evalCpp)
-exportPattern("^[[:alpha:]]+")
