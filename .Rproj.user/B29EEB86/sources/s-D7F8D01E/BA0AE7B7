@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1598899039084.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2853812273",
+    "id" : "BA0AE7B7",
+    "lastKnownWriteTime" : 1598898544,
+    "last_content_update" : 1598898544,
+    "path" : "~/Desktop/package_development/RJcluster/man/RJcluster-package.Rd",
+    "project_path" : "man/RJcluster-package.Rd",
+    "properties" : {
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_doc"
+}
