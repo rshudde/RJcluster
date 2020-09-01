@@ -194,13 +194,18 @@ RJclust = function( X, num_cut = NULL, seed = 1 )
   {
     stop( "num_cut must be < n" )
   }
-
+  
   if ( num_cut >= nrow( X ) / 4 )
   {
     warning( "RJclust will preform beter with a num_cut that divides the data into larger chunks" )
   }
   
-  # if there is a num_cut indicated, run RJ_scale
+  if ( is.null( num_cut ) & nrow( X ) > 5000 )
+  {
+    warning( "RJclust will preform better with the scaled version, try passing in a num_cut value")
+  }
+  
+  # if there is a num_cut indicated, run RJ_scale, otherwise run with no scale
   if ( !is.null( num_cut ) )
   {
     to_return = RJclust_backend( X, num_cut, seed ) 
