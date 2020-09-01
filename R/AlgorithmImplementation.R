@@ -113,7 +113,7 @@ finalClustering = function( G, Group, X )
 
   Lmark = getFinalMeans_c( G, Group, X )
 
-  LL =tcrossprod( X, Lmark ) / p
+  LL = tcrossprod( X, Lmark ) / p
 
   newRJ = Mclust( LL, modelNames = "VVI", G, verbose = F )
 
@@ -135,8 +135,10 @@ RJclust_backend = function( X, num_cut, seed = seed )
 
   # 4 - assign each data point a group
   G = as.numeric( clustering[6] )
-  classification = clustering[14]
-  classification= as.vector( unlist( classification[1] ) )
+  # classification = clustering[14] # from original code, but should be 15 - classification index
+  classification = clustering[15] # this is the classification
+  classification = as.vector( unlist( classification[1] ) )
+  
   Group = assignGroups( nrow( X ), G, classification, CC )
 
   # 5 - final clustering
