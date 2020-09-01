@@ -14,7 +14,7 @@ cleanFindCC = function( temp )
 
 ### STEP 1
 # initial clustering
-initialClustering = function( X, num_cut, seed = seed )
+initialClustering = function( X, num_cut, seed = 1 )
 {
   # get dimensions
   p = ncol( X )
@@ -27,7 +27,8 @@ initialClustering = function( X, num_cut, seed = seed )
   # d is the number of clusters, CC is an empty list
   d = 0
   CC = list()
-
+  
+  # TODO parallelize this
   # get clusters in each cut
   for ( i in 1:num_cut )
   {
@@ -121,7 +122,7 @@ finalClustering = function( G, Group, X )
 }
 
 
-## Actual function called by user
+## Actual function called by user if RJ scale
 RJclust_backend = function( X, num_cut, seed = seed )
 {
   # 1- initia lclustering of cuts of matrix
@@ -147,6 +148,26 @@ RJclust_backend = function( X, num_cut, seed = seed )
   return( RJ )
 }
 
+# RJ function with no scaling
+RJclust_noscale = function( Z, seed = 1 )
+{
+  set.seed( seed )
+  p_temp = ncol( Z )
+  n_temp = nrow( Z )
+  
+  # RJ steps
+  gg = tcrossprod( Z )/p_temp
+  gg_wodiag = gg - diag( diag( gg ) )
+  # gg_wdiag = cbind( gg_wodiag, diag( gg ) )
+  GG_new = cbind( gg_wodiag + diag( colSums( gg_wodiag ) / ( n_temp - 1 ) ), diag( gg ) )
+  
+  # par( mfrow = c( 1,1 ) )
+  # image( rotate( GG_new ), col = gray.colors( 33 ) )
+  
+  step_one_clust = Mclust( GG_new, verbose = FALSE, G = 10 )
+  return( step_one_clust )
+}
+
 #' RJclust
 #'
 #' @param X Data input (if TCGA data, data needs to be pre-procesed)
@@ -160,7 +181,7 @@ RJclust_backend = function( X, num_cut, seed = seed )
 #' data(OV)
 #' X = TCGA_cleanData(OV)
 #' clust = RJclust(X, 3)
-RJclust = function( X, num_cut, seed = 1 )
+RJclust = function( X, num_cut = NULL, seed = 1 )
 {
   # check that data is a matrix
   if ( !is.matrix( X ) )
@@ -178,8 +199,16 @@ RJclust = function( X, num_cut, seed = 1 )
   {
     warning( "RJclust will preform beter with a num_cut that divides the data into larger chunks" )
   }
+  
+  # if there is a num_cut indicated, run RJ_scale
+  if ( !is.null( num_cut ) )
+  {
+    to_return = RJclust_backend( X, num_cut, seed ) 
+  } else {
+    to_return = RJclust_noscale( X, seed )
+  }
   # run RJ algorithm
-  return( RJclust_backend( X, num_cut, seed ) )
+  return( to_return )
 }
 
 
