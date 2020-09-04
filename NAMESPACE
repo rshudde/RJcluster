@@ -9,6 +9,7 @@ import(stats)
 importFrom("graphics", "abline", "barplot", "legend")
 import(profvis)
 import(mclust)
+import(foreach)
 
 export(TCGA_cleanData)
 export(f_rez)
