@@ -237,8 +237,9 @@ RJclust_noscale = function( Z, seed = 1 )
 #'
 #' @examples
 #' data(OV)
-#' X = TCGA_cleanData(OV)
-#' clust = RJclust(X, 3)
+#' X = generateSimulationData()
+#' X = X$X
+#' clust = RJclust(X, 100)
 RJclust = function( X, num_cut = NULL, seed = 1 )
 {
   # check that data is a matrix
