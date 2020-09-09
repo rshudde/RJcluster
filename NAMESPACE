@@ -1,7 +1,6 @@
 useDynLib(RJcluster)
 importFrom(Rcpp, evalCpp)
 
-
 import(matrixStats)
 import(infotheo)
 import(rlang)
