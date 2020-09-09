@@ -1,7 +1,3 @@
-# filename = "/Users/rachaelshudde/Desktop/Processed_Data/OV_TP_Process.txt"
-# data = read.table(filename, header = TRUE, sep = "\t")
-# X = clean_data(data)
-
 cleanFindCC = function( temp )
 {
   for ( i in 1:length( temp ) )
@@ -54,66 +50,66 @@ initialClustering = function( X, num_cut, seed = 1 )
 
   return( CC = CC )
 }
-
-# initial clustering
-initialClusteringparallel = function( X, num_cut, seed = 1 )
-{
-  # get dimensions
-  p = ncol( X )
-  N = nrow( X )
-  
-  # sample data
-  set.seed( seed )
-  fold_ids = sample( rep( seq_len( num_cut ), length.out = N ) )
-  
-  # register parallel session with total number of cores - 2
-  # doParallel::registerDoParallel( cores = parallel::detectCores() - 2 )
-  
-  chk <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
-  
-  if (nzchar(chk) && chk == "TRUE") {
-    # use 2 cores in CRAN/Travis/AppVeyor
-    num_workers <- 2L
-  } else {
-    # use all cores in devtools::test()
-    num_workers <- parallel::detectCores()
-  }
-  
-  cl = parallel::makeCluster(num_workers)
-  doParallel::registerDoParallel(cl)
-  
-  CC_loop <- foreach( i = 1:num_cut, .combine='c', .multicombine=TRUE, .packages = c( "mclust" ) ) %dopar% 
-  {
-    # get relevent indices
-    temp_index = which( fold_ids == i ) # get the index
-    Z1 = X[temp_index, ]
-    
-    # get scaled cross product
-    GG1 = tcrossprod( Z1 ) / p
-    
-    # remove the diagonal and add as a new column at the end
-    gg_wodiag = GG1 - diag( diag( GG1 ) )
-    cut = length( temp_index ) - 1
-    GG_new = cbind( gg_wodiag + diag( colSums( gg_wodiag ) / ( cut-1 ) ), diag( GG1 ) )
-    
-    # calling actual clustering
-    MclustGG1 = Mclust( GG_new, modelNames = "VVI", verbose = F )
-    return_information = list( MclustGG1$classification, temp_index, MclustGG1$G )
-  }
-  
-  parallel::stopCluster(cl)
-  
-  CC = list()
-  for ( i in seq( 1, length( CC_loop ), 3 ) )
-  {
-    CC_i = getCCmatrix_c( CC_loop[[ i ]], CC_loop[[ i + 1 ]], CC_loop[[ i + 2 ]] )
-    CC_i = cleanFindCC( CC_i )
-
-    CC = c( CC, CC_i )
-  }
-  
-  return( CC = CC )
-}
+# 
+# # initial clustering
+# initialClusteringparallel = function( X, num_cut, seed = 1 )
+# {
+#   # get dimensions
+#   p = ncol( X )
+#   N = nrow( X )
+#   
+#   # sample data
+#   set.seed( seed )
+#   fold_ids = sample( rep( seq_len( num_cut ), length.out = N ) )
+#   
+#   # register parallel session with total number of cores - 2
+#   # doParallel::registerDoParallel( cores = parallel::detectCores() - 2 )
+#   
+#   chk <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
+#   
+#   if (nzchar(chk) && chk == "TRUE") {
+#     # use 2 cores in CRAN/Travis/AppVeyor
+#     num_workers <- 2L
+#   } else {
+#     # use all cores in devtools::test()
+#     num_workers <- parallel::detectCores()
+#   }
+#   
+#   cl = parallel::makeCluster(num_workers)
+#   doParallel::registerDoParallel(cl)
+#   
+#   CC_loop <- foreach( i = 1:num_cut, .combine='c', .multicombine=TRUE, .packages = c( "mclust" ) ) %dopar% 
+#   {
+#     # get relevent indices
+#     temp_index = which( fold_ids == i ) # get the index
+#     Z1 = X[temp_index, ]
+#     
+#     # get scaled cross product
+#     GG1 = tcrossprod( Z1 ) / p
+#     
+#     # remove the diagonal and add as a new column at the end
+#     gg_wodiag = GG1 - diag( diag( GG1 ) )
+#     cut = length( temp_index ) - 1
+#     GG_new = cbind( gg_wodiag + diag( colSums( gg_wodiag ) / ( cut-1 ) ), diag( GG1 ) )
+#     
+#     # calling actual clustering
+#     MclustGG1 = Mclust( GG_new, modelNames = "VVI", verbose = F )
+#     return_information = list( MclustGG1$classification, temp_index, MclustGG1$G )
+#   }
+#   
+#   parallel::stopCluster(cl)
+#   
+#   CC = list()
+#   for ( i in seq( 1, length( CC_loop ), 3 ) )
+#   {
+#     CC_i = getCCmatrix_c( CC_loop[[ i ]], CC_loop[[ i + 1 ]], CC_loop[[ i + 2 ]] )
+#     CC_i = cleanFindCC( CC_i )
+# 
+#     CC = c( CC, CC_i )
+#   }
+#   
+#   return( CC = CC )
+# }
 
 ### step 2
 # get the matrix of means
@@ -182,8 +178,9 @@ finalClustering = function( G, Group, X )
 RJclust_backend = function( X, num_cut, seed = seed )
 {
   # 1- initia lclustering of cuts of matrix
-  CC = initialClusteringparallel( X, num_cut, seed = seed )
-
+  # CC = initialClusteringparallel( X, num_cut, seed = seed )
+  CC = initialClustering( X, num_cut, seed = seed )
+  
   # 2- get first dxp matrix of means
   Cmeans = getMeansMatrix( X, CC )
 
@@ -236,7 +233,6 @@ RJclust_noscale = function( Z, seed = 1 )
 #' @export
 #'
 #' @examples
-#' data(OV)
 #' X = generateSimulationData()
 #' X = X$X
 #' clust = RJclust(X, 100)
