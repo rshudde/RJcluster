@@ -1,8 +1,8 @@
 #' generateSimulationData
 #'
-#' @param sigma noise level (default is 1)
-#' @param sparsity percentage of relevent features (default is 0.02)
-#' @param seed Random seed (default is 1234)
+#' @param sigma noise level - default is 1
+#' @param sparsity percentage of relevent features - default is 0.02
+#' @param seed Random seed - default is 1234
 #'
 #' @return Returns simulation data - a 21000x1000 sparse matrix with 4 clusters (2 clusters are n = 10,000 and 2 clusteraer n = 500)
 #' @export
@@ -12,10 +12,10 @@
 generateSimulationData = function( sigma = 1, sparsity = 0.02, seed = 1234 )
 {
   # size of various clusters
-  n1 = 10000
-  n2 = 10000
-  n3 = 500
-  n4 = 500
+  n1 = 5000
+  n2 = 5000
+  n3 = 300
+  n4 = 300
   
   n = c( n1, n2, n3, n4 ) # Unequal Cluster size settings
   p  = 10000  # first 20 being informative and remaining ones are non-informative
