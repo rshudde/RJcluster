@@ -228,7 +228,7 @@ RJclust_noscale = function( Z, seed = 1 )
 
 #' RJclust
 #'
-#' @param X Data input (if TCGA data, data needs to be pre-procesed)
+#' @param X Data input 
 #' @param num_cut Number of cuts for RJ algorithm (suggested sqrt(p))
 #' @param seed Seed (defalt = 1)
 #'
