@@ -12,13 +12,13 @@
 generateSimulationData = function( sigma = 1, sparsity = 0.02, seed = 1234 )
 {
   # size of various clusters
-  n1 = 5000
-  n2 = 5000
+  n1 = 500
+  n2 = 500
   n3 = 300
   n4 = 300
   
   n = c( n1, n2, n3, n4 ) # Unequal Cluster size settings
-  p  = 10000  # first 20 being informative and remaining ones are non-informative
+  p  = 1000  # first 20 being informative and remaining ones are non-informative
   C = 4 # true numebr of clusters
   N = sum( n )
   
