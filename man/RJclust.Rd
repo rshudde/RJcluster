@@ -4,10 +4,10 @@
 \alias{RJclust}
 \title{RJclust}
 \usage{
-RJclust(X, num_cut, seed = 1)
+RJclust(X, num_cut = NULL, seed = 1)
 }
 \arguments{
-\item{X}{Data input (if TCGA data, data needs to be pre-procesed)}
+\item{X}{Data input}
 
 \item{num_cut}{Number of cuts for RJ algorithm (suggested sqrt(p))}
 
@@ -20,7 +20,7 @@ Returns RJ algorithm result
 RJclust
 }
 \examples{
-data(OV)
-X = TCGA_cleanData(OV)
-clust = RJclust(X, 3)
+X = generateSimulationData()
+X = X$X
+clust = RJclust(X, 100)
 }
