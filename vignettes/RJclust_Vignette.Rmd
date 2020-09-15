@@ -35,6 +35,7 @@ Let's run the RJ algorithm and look at the results. We will use the RJscale vers
 
 ```{r}
 num_cut_example = sqrt(ncol(data$X))
+num_cut_example = floor(num_cut_example)
 print(num_cut_example)
 clust = RJclust(data$X, num_cut_example)
 ```
