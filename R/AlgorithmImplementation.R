@@ -112,7 +112,7 @@ initialClustering = function( X, num_cut, seed = 1 )
 # }
 
 ### step 2
-# get the matrix of means
+# get the matrix of means and return them
 getMeansMatrix = function( X, CC )
 {
   d = length( CC )
