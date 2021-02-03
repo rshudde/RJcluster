@@ -22,7 +22,7 @@ The purpose of this package is to implement the scaled RJ clust algorithm. This 
 
 The purpose of this vignette is to walk through an example with a small datast 
 ## Step 1 - 
-
+### Arturo 
 First, let's look at the data. You can see that the data is originally set up as a 10600x10000 matrix.
 ```{r}
 data = generateSimulationData()
