@@ -245,17 +245,19 @@ RJclust = function( X, num_cut = NULL, seed = 1 )
   }
 
   # check that num_cut is not too big, assuming it was not null
-  if ( !is.null(num_cut) & num_cut >= nrow( X ) )
+  if ( !is.null( num_cut ) )
   {
-    stop( "num_cut must be < n" )
-  }
+    if ( num_cut >= nrow( X ) )
+    {
+      stop( "num_cut must be < n" )
+    }
     
-
-  if ( !is.null(num_cut) &num_cut >= nrow( X ) / 4 )
-  {
-    warning( "RJclust will preform beter with a num_cut that divides the data into larger chunks" )
+    if ( num_cut >= nrow( X ) / 4 )
+    {
+      warning( "RJclust will preform beter with a num_cut that divides the data into larger chunks" )
+    }
   }
-  
+
   if ( is.null( num_cut ) & nrow( X ) > 5000 )
   {
     warning( "RJclust will preform better with the scaled version, try passing in a num_cut value")
