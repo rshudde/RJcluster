@@ -244,17 +244,14 @@ RJclust = function( X, num_cut = NULL, seed = 1 )
     stop( "Data must be in a matrix form" )
   }
 
-  # check that num_cut is not too big, assuming it was not initially null
-  if ( !is.null( num_cut ) )
+  # check that num_cut is not too big, assuming it was not null
+  if ( !is.null(num_cut) & num_cut >= nrow( X ) )
   {
-    if ( num_cut >= nrow( X ) )
-    {
-      stop( "num_cut must be < n" )
-    }
-    
+    stop( "num_cut must be < n" )
   }
+    
 
-  if ( num_cut >= nrow( X ) / 4 )
+  if ( !is.null(num_cut) &num_cut >= nrow( X ) / 4 )
   {
     warning( "RJclust will preform beter with a num_cut that divides the data into larger chunks" )
   }
