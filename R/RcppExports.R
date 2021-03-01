@@ -21,24 +21,12 @@ getFinalMeans_c <- function(G, Group, X) {
     .Call('_RJcluster_getFinalMeans_c', PACKAGE = 'RJcluster', G, Group, X)
 }
 
-getImportantGenes_c <- function(X, cluster) {
-    .Call('_RJcluster_getImportantGenes_c', PACKAGE = 'RJcluster', X, cluster)
-}
-
 tcrossprod_c <- function(X, Y) {
     .Call('_RJcluster_tcrossprod_c', PACKAGE = 'RJcluster', X, Y)
 }
 
 scale_c <- function(X, medians = FALSE) {
     .Call('_RJcluster_scale_c', PACKAGE = 'RJcluster', X, medians)
-}
-
-get_percentages_c <- function(X) {
-    .Call('_RJcluster_get_percentages_c', PACKAGE = 'RJcluster', X)
-}
-
-replace_zeroes_c <- function(X) {
-    invisible(.Call('_RJcluster_replace_zeroes_c', PACKAGE = 'RJcluster', X))
 }
 
 rcpparma_hello_world <- function() {
