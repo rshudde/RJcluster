@@ -1,6 +1,6 @@
 Package: RJcluster
 Title: RJ Clustering Algorithm
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     c(person(given = "Rachael",
            family = "Shudde",
