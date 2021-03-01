@@ -18,7 +18,7 @@ Description: Clustering algorithm for high dimensional data. This algorithm is i
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
-Imports: Rcpp (>= 1.0.2), matrixStats, infotheo, rlang, stats, graphics, profvis, mclust, doParallel, foreach, parallel
+Imports: Rcpp (>= 1.0.2), matrixStats, infotheo, rlang, stats, graphics, profvis, mclust, foreach
 LinkingTo: Rcpp, RcppArmadillo
 Suggests: 
     testthat (>= 2.1.0),
