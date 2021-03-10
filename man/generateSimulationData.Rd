@@ -2,22 +2,33 @@
 % Please edit documentation in R/DATA_generate_test_data.R
 \name{generateSimulationData}
 \alias{generateSimulationData}
-\title{generateSimulationData}
+\title{generateSimulationData
+This is simulaiton data to check performance of RJcluster. For a balanced case, use the default n (4 clusters of size 20), for an unbalanced case use
+n = c(20, 20, 200, 200). A high SNR (sigma = 1) or low SNR (sigma = 2) can also be used with the balanced or unbalanced data.}
 \usage{
-generateSimulationData(sigma = 1, sparsity = 0.02, seed = 1234)
+generateSimulationData(
+  n = c(20, 20, 20, 20),
+  high_signal = FALSE,
+  sparsity = 0.02,
+  seed = 1234
+)
 }
 \arguments{
-\item{sigma}{noise level - default is 1}
+\item{n}{size of various clusters - default is balanced (20, 20, 20, 20) case to match simulations in RJclust paper}
+
+\item{high_signal}{boolean. TRUE value is high SNR (sigma = 1), FALSE value is low SNR (sigma = 2)}
 
 \item{sparsity}{percentage of relevent features - default is 0.02}
 
 \item{seed}{Random seed - default is 1234}
 }
 \value{
-Returns simulation data - a 21000x1000 sparse matrix with 4 clusters (2 clusters are n = 10,000 and 2 clusteraer n = 500)
+Returns simulation data - a sum(N)x220 sparse matrix with 4 clusters (2 clusters are n = 10,000 and 2 clusteraer n = 500)
 }
 \description{
 generateSimulationData
+This is simulaiton data to check performance of RJcluster. For a balanced case, use the default n (4 clusters of size 20), for an unbalanced case use
+n = c(20, 20, 200, 200). A high SNR (sigma = 1) or low SNR (sigma = 2) can also be used with the balanced or unbalanced data.
 }
 \examples{
 X = generateSimulationData()
