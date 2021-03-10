@@ -53,7 +53,3 @@ generateSimulationData = function( n = c(20, 20, 20, 20), high_signal = FALSE, s
   
   return( list( X = X, Y = Y ) )
 }
-
-
-# add
-# - marker for balanced / unbalanced
