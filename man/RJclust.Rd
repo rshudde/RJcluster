@@ -22,5 +22,5 @@ RJclust
 \examples{
 X = generateSimulationData()
 X = X$X
-clust = RJclust(X, 100)
+clust = RJclust(X)
 }
