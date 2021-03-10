@@ -235,7 +235,7 @@ RJclust_noscale = function( Z, seed = 1 )
 #' @examples
 #' X = generateSimulationData()
 #' X = X$X
-#' clust = RJclust(X, 100)
+#' clust = RJclust(X)
 RJclust = function( X, num_cut = NULL, seed = 1 )
 {
   # check that data is a matrix
