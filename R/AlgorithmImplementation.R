@@ -226,7 +226,8 @@ RJclust_noscale = function( Z, seed = 1 )
 #' RJclust
 #'
 #' @param X Data input 
-#' @param num_cut Number of cuts for RJ algorithm (suggested sqrt(p))
+#' @param scaleRJ Should the scaled version of RJclust be used? Default is no. Using scaledRJ is recommended when n is large. 
+#' @param num_cut Number of cuts for scaledRJ algorithm (suggested sqrt(p)). Ignored if scaleRJ = FALSE
 #' @param seed Seed (defalt = 1)
 #'
 #' @return Returns RJ algorithm result
@@ -236,7 +237,7 @@ RJclust_noscale = function( Z, seed = 1 )
 #' X = generateSimulationData()
 #' X = X$X
 #' clust = RJclust(X)
-RJclust = function( X, num_cut = NULL, seed = 1 )
+RJclust = function( X, scaleRJ = FALSE, num_cut = NULL, seed = 1 )
 {
   # check that data is a matrix
   if ( !is.matrix( X ) )
@@ -245,7 +246,7 @@ RJclust = function( X, num_cut = NULL, seed = 1 )
   }
 
   # check that num_cut is not too big, assuming it was not null
-  if ( !is.null( num_cut ) )
+  if ( !is.null( num_cut ) & scaleRJ )
   {
     if ( num_cut >= nrow( X ) )
     {
@@ -258,14 +259,19 @@ RJclust = function( X, num_cut = NULL, seed = 1 )
     }
   }
 
-  if ( is.null( num_cut ) & nrow( X ) > 5000 )
+  if ( !scaleRJ & nrow( X ) > 5000 )
   {
     warning( "RJclust will preform better with the scaled version, try passing in a num_cut value")
   }
   
   # if there is a num_cut indicated, run RJ_scale, otherwise run with no scale
-  if ( !is.null( num_cut ) )
+  if ( scaleRJ  )
   {
+    if (is.null(num_cut))
+    {
+      num_cut = floor(sqrt(ncol(X)))
+      warning("No num_cut value provided, using sqrt(p)")
+    }
     to_return = RJclust_backend( X, num_cut, seed ) 
   } else {
     to_return = RJclust_noscale( X, seed )
